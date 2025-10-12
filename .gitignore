@@ -1,0 +1,11 @@
+**/*.lua.swp
+**/*.swp
+**/*.swo
+**/*.swn
+**/*~
+shada/
+undodir/
+.luarc.json
+.luarc
+.stylua.toml
+mason/
