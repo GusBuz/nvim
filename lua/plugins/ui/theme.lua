@@ -47,6 +47,8 @@ return {
 							["@type.tag.css"] = { fg = mocha.sky },
 							StatusLine = { bg = mocha.base },
 							StatusLineNC = { bg = mocha.base },
+							Separator = { fg = "#1e1e1e", bg = "" },
+							BufferLineOffsetSeparator = { fg = mocha.base, bg = mocha.base },
 							DiagnosticVirtualTextOk = { bg = "" },
 							DiagnosticVirtualTextHint = { bg = "" },
 							DiagnosticVirtualTextInfo = { bg = "" },

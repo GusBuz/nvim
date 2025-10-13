@@ -51,6 +51,14 @@ opt.termguicolors = true
 -- cursor highlight
 o.cursorline = true
 
+-- blink cursor
+vim.opt.guicursor = {
+	"a:blinkon400-blinkoff250",
+	"n-v-c:block",
+	"i-ci:ver25",
+	"r:hor20",
+}
+
 -- determine what is save in sessions
 o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 

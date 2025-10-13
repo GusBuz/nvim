@@ -10,10 +10,12 @@ return {
 			options = {
 				disabled_filetypes = {
 					"alpha",
-					winbar = { "NvimTree" },
+					"toggleterm",
+					winbar = { "NvimTree", "toggleterm" },
 				},
-				globalstatus = true,
+				globalstatus = false,
 				icons_enabled = true,
+				ignore_focus = { "NvimTree", "toggleterm" },
 				theme = catppuccin,
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "", right = "" },
@@ -53,9 +55,15 @@ return {
 
 			inactive_winbar = {
 				lualine_a = {
-					function()
-						return " "
-					end,
+					{
+						function()
+							return "󱞫"
+						end,
+						color = {
+							fg = "#a19283",
+							bg = "#1e1e1e",
+						},
+					},
 				},
 				lualine_b = {},
 				lualine_c = {},
@@ -87,11 +95,9 @@ return {
 						end,
 
 						icon = " LSP:",
-						color = { gui = "bold" },
-						component_separators = { left_sep = "", right_sep = "" },
 					},
 				},
-				lualine_x = { { "diagnostics", component_separators = { left_sep = "", right_sep = "" } }, "%=" },
+				lualine_x = { "diagnostics" },
 				lualine_y = {
 					{
 						lazy_status.updates,
@@ -104,14 +110,17 @@ return {
 			},
 
 			inactive_sections = {
-				lualine_a = {},
+				lualine_a = { { "filename", color = {
+					bg = "#a19283",
+					fg = "#1e1e1e",
+				} } },
 				lualine_b = {},
-				lualine_c = { "filename" },
+				lualine_c = {},
 				lualine_x = { "location" },
 				lualine_y = {},
 				lualine_z = {},
 			},
-			extensions = { "nvim-tree" },
+			extensions = { "nvim-tree", "toggleterm" },
 		})
 	end,
 }

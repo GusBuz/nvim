@@ -24,3 +24,12 @@ hl(0, "MultiCursorMatchPreview", { link = "Search" })
 hl(0, "MultiCursorDisabledCursor", { reverse = true })
 hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
 hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
+
+-- separators
+hl(0, "WinSeparator", { link = "Separator" })
+hl(0, "BufferLineSeparator", { link = "Separator" })
+hl(0, "BufferLineSeparatorVisible", { link = "Separator" })
+hl(0, "BufferLineSeparatorSelected", { link = "Separator" })
+hl(0, "NvimTreeStatusLineNc", { fg = "", bg = "" })
+
+
