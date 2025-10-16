@@ -21,6 +21,7 @@ return {
 		vim.lsp.config("ts_ls", require("config.lsp.ts_ls"))
 		vim.lsp.config("jsonls", require("config.lsp.jsonls"))
 		vim.lsp.config("dartls", require("config.lsp.dartls"))
+        vim.lsp.config("basedpyright", require("config.lsp.basedpyright"))
 
 		vim.diagnostic.config({
 			-- virtual_lines = true,

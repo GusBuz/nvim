@@ -1,1 +1,1 @@
-return { "akinsho/toggleterm.nvim", version = "*", opts = { size = 5 } }
+return { "akinsho/toggleterm.nvim", version = "*", opts = { size = 10 } }

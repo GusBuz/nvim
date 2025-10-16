@@ -16,6 +16,7 @@ return {
 				"javascript",
 				"regex",
 				"bash",
+                "python"
 			},
 
 			highlight = {

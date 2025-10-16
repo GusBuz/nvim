@@ -4,7 +4,7 @@ local general = augroup("General", { clear = true })
 
 -- autocmd for mfussenegger/nvim-lint
 autocmd({ "BufWritePost" }, {
-	pattern = "*.js,*.jsx,*.css,*.html,*.lua",
+	pattern = "*.js,*.jsx,*.css,*.html,*.lua,*.py",
 
 	callback = function()
 		require("lint").try_lint()
