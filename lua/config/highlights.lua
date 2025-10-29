@@ -32,4 +32,10 @@ hl(0, "BufferLineSeparatorVisible", { link = "Separator" })
 hl(0, "BufferLineSeparatorSelected", { link = "Separator" })
 hl(0, "NvimTreeStatusLineNc", { fg = "", bg = "" })
 
-
+-- debugger
+vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = "#f98080" })
+vim.api.nvim_set_hl(0, "DapBreakpointCondition", { fg = "#f9bd69" })
+vim.api.nvim_set_hl(0, "DapLogPoint", { fg = "#a990c9" })
+vim.api.nvim_set_hl(0, "DapStopped", { fg = "#b0d080" })
+vim.api.nvim_set_hl(0, "DapBreakpointRejected", { fg = "#ffa9c9" })
+vim.api.nvim_set_hl(0, "DapStoppedLine", { bg = "#2d3a3a" })

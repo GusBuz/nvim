@@ -24,8 +24,25 @@ return {
 					sign = { namespace = { "gitsigns" }, maxwidth = 2, auto = true },
 					click = "v:lua.ScSa",
 				},
+				{
+					sign = {
+						name = {
+							"DapBreakpoint",
+							"DapLogPoint",
+							"DapStopped",
+							"DapStepInto",
+							"DapStepOver",
+							"DapStepOut",
+						},
+						maxwidth = 2,
+						colwidth = 1,
+						auto = true,
+						wrap = true,
+					},
 
-				{ text = { "", builtin.foldfunc, " " }, click = "v:lua.ScFa" },
+					click = "v:lua.ScSa",
+				},
+				{ text = { " ", builtin.foldfunc, " " }, click = "v:lua.ScFa" },
 			},
 		})
 	end,

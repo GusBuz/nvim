@@ -56,10 +56,9 @@ autocmd("LspAttach", {
 			vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 		end
 
-		map("<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer diagnostics")
-		map("<leader>d", vim.diagnostic.open_float, "Open Diagnostic Float")
 		map("K", vim.lsp.buf.hover, "Hover Documentation")
-
+		map("<leader>lO", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer diagnostics")
+		map("<leader>lo", vim.diagnostic.open_float, "Open Diagnostic Float")
 		map("<leader>le", vim.lsp.buf.declaration, "Goto Declaration")
 		map("<leader>lf", "<cmd>Telescope lsp_references<CR>", "Show references")
 		map("<leader>ld", "<cmd>Telescope lsp_definitions<CR>", "Show definitions")

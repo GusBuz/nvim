@@ -22,20 +22,30 @@ return {
 		mason_lspconfig.setup({
 			automatic_installation = false,
 			ensure_installed = {
-				"ts_ls",
-				"html",
-				"cssls",
+				-- "ts_ls",
+				-- "html",
+				-- "cssls",
 				"lua_ls",
-				"emmet_ls",
-				"eslint",
+				-- "emmet_ls",
+				-- "eslint",
+                "jsonls",
+                -- "basedpyright"
+                "kotlin_lsp",
 			},
 		})
 
 		mason_tool_installer.setup({
 			ensure_installed = {
+                -- Formatters & Linters
 				"prettier",
 				"stylua",
-				"eslint_d",
+				-- "eslint_d",
+				-- "ruff",
+                -- "ktlint",
+
+				-- Debuggers (DAP)
+				-- "debugpy",
+				-- "js-debug-adapter",
 			},
 		})
 	end,

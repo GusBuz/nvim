@@ -20,31 +20,85 @@ function M.setup_runners()
 		end
 	end
 
+	local function get_file_vars()
+		local expand = vim.fn.expand
+
+		return {
+			path = expand("%:p"), -- /home/user/file.kt
+			name = expand("%:t"), -- file.kt
+			name_no_ext = expand("%:t:r"), -- file
+			root = expand("%:r"), -- /home/user/file
+			dir = expand("%:p:h"), -- /home/user
+			ext = expand("%:e"), -- kt
+		}
+	end
+
+	local function simple_runner(cmd_template)
+		return function()
+			local vars = get_file_vars()
+			local cmd = cmd_template:gsub("${(%w+)}", function(key)
+				return vars[key] or ("${" .. key .. "}")
+			end)
+			run_command(cmd)
+		end
+	end
+
+	local function get_relative_build_dir(file_path)
+		local current_dir = vim.fn.getcwd()
+		local relative_path = file_path:gsub("^" .. current_dir .. "/", ""):gsub("%.kt$", ""):gsub("%.java$", "")
+		local dir_path = relative_path:match("(.+)/[^/]*$") or ""
+		dir_path = dir_path:gsub("^src/", "")
+		return dir_path
+	end
+
 	local runners = {
-		python = function()
-			local file_path = vim.fn.shellescape(vim.fn.expand("%:p"))
-			run_command("python " .. file_path)
-		end,
+		python = simple_runner("python ${path}"),
+		javascript = simple_runner("node ${path}"),
+		lua = simple_runner("lua ${path}"),
+		sh = simple_runner("bash ${path}"),
 
 		java = function()
-			local file_path = vim.fn.shellescape(vim.fn.expand("%:p"))
-			local file_root = vim.fn.shellescape(vim.fn.expand("%:r"))
-			run_command("javac " .. file_path + " && java " .. file_root)
+			local vars = get_file_vars()
+			local build_dir = "build"
+			local relative_build_dir = get_relative_build_dir(vars.path)
+			local build_subdir = build_dir .. "/" .. (relative_build_dir ~= "" and relative_build_dir or ".")
+
+			run_command(
+				"mkdir -p '"
+					.. build_subdir
+					.. "' && "
+					.. "javac '"
+					.. vars.path
+					.. "' -d '"
+					.. build_subdir
+					.. "' && "
+					.. "java -cp '"
+					.. build_subdir
+					.. "' "
+					.. vars.name_no_ext
+			)
 		end,
 
-		javascript = function()
-			local file_path = vim.fn.shellescape(vim.fn.expand("%:p"))
-			run_command("node " .. file_path)
-		end,
+		kotlin = function()
+			local vars = get_file_vars()
+			local build_dir = "build"
+			local relative_build_dir = get_relative_build_dir(vars.path)
+			local build_subdir = build_dir .. "/" .. (relative_build_dir ~= "" and relative_build_dir or ".")
+			local jar_path = build_subdir .. "/" .. vars.name_no_ext .. ".jar"
 
-		lua = function()
-			local file_path = vim.fn.shellescape(vim.fn.expand("%:p"))
-			run_command("lua " .. file_path)
-		end,
-
-		sh = function()
-			local file_path = vim.fn.shellescape(vim.fn.expand("%:p"))
-			run_command("bash " .. file_path)
+			run_command(
+				"mkdir -p '"
+					.. build_subdir
+					.. "' && "
+					.. "kotlinc '"
+					.. vars.path
+					.. "' -include-runtime -d '"
+					.. jar_path
+					.. "' && "
+					.. "java -jar '"
+					.. jar_path
+					.. "'"
+			)
 		end,
 	}
 

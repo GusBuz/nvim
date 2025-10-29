@@ -19,6 +19,10 @@ return {
 						text_align = "center",
 						separator = true,
 					},
+					{
+						filetype = "dapui_scopes",
+						separator = true,
+					},
 				},
 				indicator = {
 					style = "icon",

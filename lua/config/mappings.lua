@@ -48,7 +48,8 @@ map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 map({ "n", "v" }, "<leader>mp", function()
 	require("conform").format({
 		lsp_fallback = true,
-		timeout_ms = 500,
+		async = false,
+		timeout_ms = 2500,
 	})
 end, { desc = "Format file or range (in visual mode)" })
 
@@ -71,15 +72,15 @@ map({ "c" }, "<C-s>", function()
 end, { desc = "Toggle Flash Search" })
 
 -- flutter tools
-map("n", "<leader>FS", ":FlutterRun<CR>", { desc = "Flutter Run" })
-map("n", "<leader>FR", ":FlutterRestart<CR>", { desc = "Flutter Hot Restart" })
-map("n", "<leader>FQ", ":FlutterQuit<CR>", { desc = "Flutter Quit" })
+-- map("n", "<leader>FS", ":FlutterRun<CR>", { desc = "Flutter Run" })
+-- map("n", "<leader>FR", ":FlutterRestart<CR>", { desc = "Flutter Hot Restart" })
+-- map("n", "<leader>FQ", ":FlutterQuit<CR>", { desc = "Flutter Quit" })
 
 -- lazygit
 map({ "n", "v" }, "<leader>g", "<cmd>LazyGit<cr>", { desc = "Open lazy git" })
 
 -- maximizer
-map({ "n", "v" }, "<leader>sm", "<cmd>MaximizerToggle<CR>", { desc = "Maximize/minimize a split" })
+map({ "n", "v" }, "M", "<cmd>MaximizerToggle<CR>", { desc = "Maximize/minimize a split" })
 
 -- multicursor
 local mc = require("multicursor-nvim")
@@ -128,6 +129,47 @@ mc.addKeymapLayer(function(layerSet)
 	end, { desc = "Enable and clear cursor" })
 end)
 
+-- nvim-dap
+local dap = require("dap")
+local dapui = require("dapui")
+local dapui_widgets = require("dap.ui.widgets")
+
+map("n", "<F6>", dap.continue, { desc = "Debug: Continue/Start" })
+map("n", "<F10>", dap.step_over, { desc = "Debug: Step Over" })
+map("n", "<F11>", dap.step_into, { desc = "Debug: Step Into" })
+map("n", "<F12>", dap.step_out, { desc = "Debug: Step Out" })
+
+map("n", "<Leader>dd", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
+map("n", "<Leader>dD", dap.set_breakpoint, { desc = "Debug: Set Conditional Breakpoint" })
+map("n", "<Leader>dbl", function()
+	dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+end, { desc = "Debug: Set Log Point" })
+map("n", "<Leader>dbc", dap.clear_breakpoints, { desc = "Debug: Clear All Breakpoints" })
+
+map("n", "<Leader>dr", dap.repl.open, { desc = "Debug: Open REPL" })
+map("n", "<Leader>dl", dap.run_last, { desc = "Debug: Run Last Configuration" })
+map("n", "<Leader>dq", function()
+	dap.terminate()
+	dapui.close()
+end, { desc = "Debug: Terminate Session & Close UI" })
+
+map({ "n", "v" }, "<Leader>dh", dapui_widgets.hover, { desc = "Debug: Hover Variables" })
+map({ "n", "v" }, "<Leader>dp", dapui_widgets.preview, { desc = "Debug: Preview Expression" })
+map("n", "<Leader>df", function()
+	dapui_widgets.centered_float(dapui_widgets.frames)
+end, { desc = "Debug: Show Call Stack" })
+map("n", "<Leader>ds", function()
+	dapui_widgets.centered_float(dapui_widgets.scopes)
+end, { desc = "Debug: Show Scopes" })
+map("n", "<Esc>", function()
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local config = vim.api.nvim_win_get_config(win)
+		if config.relative ~= "" then
+			vim.api.nvim_win_close(win, true)
+		end
+	end
+end, { desc = "Close Floating Windows" })
+
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "NvimTree Toggle window" })
 map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "NvimTree Focus window" })
@@ -171,17 +213,3 @@ map("n", "<leader>ka", "<cmd>WhichKey <CR>", { desc = "Whichkey all keymaps" })
 map("n", "<leader>kq", function()
 	vim.cmd("WhichKey " .. vim.fn.input("WhichKey: "))
 end, { desc = "Whichkey query lookup" })
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -4,11 +4,16 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-cmdline",
 		{ "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp" },
 		"saadparwaiz1/cmp_luasnip",
 		"rafamadriz/friendly-snippets",
 		"onsails/lspkind.nvim",
 		"brenoprata10/nvim-highlight-colors",
+		"hrsh7th/cmp-nvim-lua",
+		"hrsh7th/cmp-calc",
+		"hrsh7th/cmp-emoji",
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -53,14 +58,17 @@ return {
 			sources = cmp.config.sources({
 				{
 					name = "nvim_lsp",
-					priority = 100,
+					priority = 1000,
 					entry_filter = function(entry)
 						return not (entry:get_kind() == cmp.lsp.CompletionItemKind.Snippet)
 					end,
 				},
-				{ name = "luasnip", priority = 90 },
-				{ name = "buffer", priority = 80 },
-				{ name = "path", priority = 70 },
+				{ name = "luasnip", priority = 900 },
+				{ name = "nvim_lua", priority = 850 },
+				{ name = "buffer", priority = 500 },
+				{ name = "path", priority = 400 },
+				{ name = "calc", priority = 300 },
+				{ name = "emoji", priority = 200 },
 			}),
 
 			formatting = {
@@ -93,6 +101,10 @@ return {
 					end
 					return item
 				end,
+			},
+			experimental = {
+				ghost_text = true,
+				native_menu = false,
 			},
 		})
 	end,

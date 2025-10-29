@@ -13,15 +13,16 @@ return {
 		vim.lsp.config("*", {
 			capabilities = capabilities,
 		})
-		vim.lsp.config("cssls", require("config.lsp.cssls"))
-		vim.lsp.config("emmet_ls", require("config.lsp.emmet_ls"))
-		vim.lsp.config("eslint", require("config.lsp.eslint"))
-		vim.lsp.config("html", require("config.lsp.html"))
+		-- vim.lsp.config("cssls", require("config.lsp.cssls"))
+		-- vim.lsp.config("emmet_ls", require("config.lsp.emmet_ls"))
+		-- vim.lsp.config("eslint", require("config.lsp.eslint"))
+		-- vim.lsp.config("html", require("config.lsp.html"))
 		vim.lsp.config("lua_ls", require("config.lsp.lua_ls"))
-		vim.lsp.config("ts_ls", require("config.lsp.ts_ls"))
+		-- vim.lsp.config("ts_ls", require("config.lsp.ts_ls"))
 		vim.lsp.config("jsonls", require("config.lsp.jsonls"))
-		vim.lsp.config("dartls", require("config.lsp.dartls"))
-        vim.lsp.config("basedpyright", require("config.lsp.basedpyright"))
+		-- vim.lsp.config("dartls", require("config.lsp.dartls"))
+		-- vim.lsp.config("basedpyright", require("config.lsp.basedpyright"))
+		vim.lsp.config("kotlin_lsp", require("config.lsp.kotlin_lsp"))
 
 		vim.diagnostic.config({
 			-- virtual_lines = true,

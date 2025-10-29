@@ -5,6 +5,7 @@ return {
 		local conform = require("conform")
 
 		conform.setup({
+			log_level = vim.log.levels.DEBUG,
 			formatters_by_ft = {
 				javascript = { "prettier" },
 				typescript = { "prettier" },
@@ -19,6 +20,7 @@ return {
 				graphql = { "prettier" },
 				liquid = { "prettier" },
 				lua = { "stylua" },
+				kotlin = { "kotlin_lsp" },
 			},
 			format_on_save = false,
 		})

@@ -11,11 +11,29 @@ return {
 				disabled_filetypes = {
 					"alpha",
 					"toggleterm",
-					winbar = { "NvimTree", "toggleterm" },
+					winbar = {
+						"NvimTree",
+						"toggleterm",
+						"dap-repl",
+						"dapui_scopes",
+						"dapui_breakpoints",
+						"dapui_stacks",
+						"dapui_watches",
+						"dapui_console",
+					},
 				},
 				globalstatus = false,
 				icons_enabled = true,
-				ignore_focus = { "NvimTree", "toggleterm" },
+				ignore_focus = {
+					"NvimTree",
+					"toggleterm",
+					"dap-repl",
+					"dapui_scopes",
+					"dapui_breakpoints",
+					"dapui_stacks",
+					"dapui_watches",
+					"dapui_console",
+				},
 				theme = catppuccin,
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "", right = "" },
@@ -96,6 +114,19 @@ return {
 
 						icon = " LSP:",
 					},
+					{
+						function()
+							return require("dap").status()
+						end,
+						icon = { "", color = { fg = "#e7c664" } },
+						cond = function()
+							if not package.loaded.dap then
+								return false
+							end
+							local session = require("dap").session()
+							return session ~= nil
+						end,
+					},
 				},
 				lualine_x = { "diagnostics" },
 				lualine_y = {
@@ -116,7 +147,7 @@ return {
 				} } },
 				lualine_b = {},
 				lualine_c = {},
-				lualine_x = { "location" },
+				lualine_x = {},
 				lualine_y = {},
 				lualine_z = {},
 			},

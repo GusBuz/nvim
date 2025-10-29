@@ -11,12 +11,13 @@ return {
 				"printf",
 				"vim",
 				"vimdoc",
-				"html",
-				"css",
-				"javascript",
-				"regex",
-				"bash",
-                "python"
+				-- "html",
+				-- "css",
+				-- "javascript",
+				-- "regex",
+				-- "bash",
+				-- "python"
+				"kotlin",
 			},
 
 			highlight = {
